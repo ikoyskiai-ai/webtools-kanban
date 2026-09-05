@@ -21,6 +21,12 @@ The project is a vanilla JavaScript implementation of a Kanban board using ES6 m
 - State includes `columns` (mapping column IDs to lists of card IDs), `cards` (mapping card IDs to card data), and `settings` (e.g., theme).
 - State changes are persisted via `StorageManager` and trigger a re-render through the `UI` layer.
 
+### UI Interaction Patterns
+- **DOM Access**: The `UI` object centralizes access to common DOM elements.
+- **Communication**: The project uses an event-driven approach for UI-to-App communication. The `UI` layer often dispatches `CustomEvent` objects on the `window` object to signal actions that require state changes.
+    - Example events: `open-card-modal`, `rename-column`, `delete-column`.
+- **Rendering**: The board is re-rendered entirely via `UI.renderBoard(state)` whenever a significant state change occurs, followed by a re-initialization of SortableJS.
+
 ### Key Dependencies
 - **Tailwind CSS**: Used for responsive styling.
 - **SortableJS**: Implements the drag-and-drop functionality for moving cards between columns.
